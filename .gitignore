@@ -23,3 +23,5 @@ samples/
 # Docker
 *.log
 .env
+*Zone.Identifier
+llama-cpp-cli-test/models/*.gguf
