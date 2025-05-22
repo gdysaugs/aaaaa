@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  hello-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mcp-hello-app
+    restart: unless-stopped
+    volumes:
+      - ./logs:/app/logs
+    environment:
+      - APP_ENV=development
+      - DEBUG=true
+      - PYTHONUNBUFFERED=1
+    ports:
+      - "8080:8080"
+    command: python -c "import time; print('🚀 MCPで作成したDocker Composeが起動しました！'); time.sleep(2); print('🐳 コンテナが実行中...'); time.sleep(1); print('🐍 Pythonスクリプトを実行します'); import hello_world; print('✅ 完了！')"
+    
+  redis:
+    image: redis:alpine
+    container_name: mcp-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+
+volumes:
+  redis-data: 

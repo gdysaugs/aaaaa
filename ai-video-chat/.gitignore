@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.pyc
+
+# VSCode/Cursor
+.vscode/
+*.code-workspace
+
+# モデル・出力
+*.pth
+*.pt
+*.mp4
+*.avi
+*.wav
+data/output/
+Wav2Lip/temp/
+facefusion-test/data/output/
+wav2lip-test/data/output/
+models_download/
+output/
+samples/
+
+# Docker
+*.log
+.env
+*Zone.Identifier
+llama-cpp-cli-test/models/*.gguf
+
+# モデル・データ
+llama/models/*
+!llama/models/.gitkeep
+wav2lip/models/*
+!wav2lip/models/.gitkeep
+facefusion/models/*
+!facefusion/models/.gitkeep
+data/output/*
+data/source/*
+!data/source/.gitkeep
+!data/output/.gitkeep
+
+# キャッシュ・ビルド
+node_modules/
+dist/
+
+# OS/エディタ
+.DS_Store
+*.swp
+*.swo

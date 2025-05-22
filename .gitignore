@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+
+# VSCode/Cursor
+.vscode/
+*.code-workspace
+
+# モデル・出力
+*.pth
+*.pt
+*.mp4
+*.avi
+*.wav
+data/output/
+Wav2Lip/temp/
+facefusion-test/data/output/
+wav2lip-test/data/output/
+models_download/
+output/
+samples/
+
+# Docker
+*.log
+.env
+*Zone.Identifier
+llama-cpp-cli-test/models/*.gguf

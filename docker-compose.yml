@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  tts-voice-clone:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: tts-voice-clone
+    container_name: tts-voice-clone
+    volumes:
+      - ./samples:/app/samples
+      - ./output:/app/output
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    tty: true
+    stdin_open: true
+    command: --text "これはテストです。ボイスクローンの音声サンプルです。" --speaker_wav /app/samples/voice.wav --language ja --output /app/output/test_output.wav 
