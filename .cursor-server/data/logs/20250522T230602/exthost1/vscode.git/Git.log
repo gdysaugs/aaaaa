@@ -1,0 +1,86 @@
+2025-05-22 23:06:17.816 [info] [main] Log level: Info
+2025-05-22 23:06:17.816 [info] [main] Validating found git in: "git"
+2025-05-22 23:06:17.816 [info] [main] Using git "2.34.1" from "git"
+2025-05-22 23:06:17.816 [info] [Model][doInitialScan] Initial repository scan started
+2025-05-22 23:06:17.816 [info] > git rev-parse --show-toplevel [71ms]
+2025-05-22 23:06:17.816 [info] > git rev-parse --git-dir --git-common-dir [11ms]
+2025-05-22 23:06:17.816 [info] [Model][openRepository] Opened repository: /home/adama/aaaaa
+2025-05-22 23:06:17.816 [info] > git config --get commit.template [3ms]
+2025-05-22 23:06:17.831 [info] > git rev-parse --show-toplevel [8ms]
+2025-05-22 23:06:17.873 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [46ms]
+2025-05-22 23:06:17.874 [info] > git rev-parse --show-toplevel [39ms]
+2025-05-22 23:06:17.878 [warning] [Git][revParse] Unable to read file: ENOENT: no such file or directory, open '/home/adama/aaaaa/.git/refs/remotes/origin/main'
+2025-05-22 23:06:17.893 [info] > git rev-parse --show-toplevel [12ms]
+2025-05-22 23:06:17.893 [info] > git rev-parse refs/remotes/origin/main [15ms]
+2025-05-22 23:06:17.912 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [8ms]
+2025-05-22 23:06:17.915 [info] > git rev-parse --show-toplevel [6ms]
+2025-05-22 23:06:17.919 [info] > git rev-parse --show-toplevel [1ms]
+2025-05-22 23:06:17.928 [info] > git rev-parse --show-toplevel [1ms]
+2025-05-22 23:06:17.933 [info] > git rev-parse --show-toplevel [2ms]
+2025-05-22 23:06:17.936 [info] [Model][doInitialScan] Initial repository scan completed - repositories (1), closed repositories (0), parent repositories (0), unsafe repositories (0)
+2025-05-22 23:06:18.245 [info] > git symbolic-ref --short refs/remotes/origin/HEAD [5ms]
+2025-05-22 23:06:18.379 [info] > git check-ignore -v -z --stdin [6ms]
+2025-05-22 23:06:18.728 [info] > git status -z -uall [831ms]
+2025-05-22 23:06:18.749 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [8ms]
+2025-05-22 23:06:18.762 [info] > git config --get commit.template [14ms]
+2025-05-22 23:06:18.763 [info] > git config --local branch.main.vscode-merge-base [8ms]
+2025-05-22 23:06:18.765 [warning] [Git][config] git config failed: Failed to execute git
+2025-05-22 23:06:18.780 [info] > git reflog main --grep-reflog=branch: Created from *. [11ms]
+2025-05-22 23:06:18.785 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [11ms]
+2025-05-22 23:06:18.786 [info] > git symbolic-ref --short refs/remotes/origin/HEAD [2ms]
+2025-05-22 23:06:18.796 [warning] [Git][revParse] Unable to read file: ENOENT: no such file or directory, open '/home/adama/aaaaa/.git/refs/remotes/origin/main'
+2025-05-22 23:06:18.797 [info] > git rev-parse refs/remotes/origin/main [1ms]
+2025-05-22 23:06:18.806 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/origin/main refs/remotes/origin/main [16ms]
+2025-05-22 23:06:18.818 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [12ms]
+2025-05-22 23:06:18.820 [info] > git config --local branch.main.vscode-merge-base origin/main [9ms]
+2025-05-22 23:06:18.850 [info] > git status -z -uall [49ms] (cancelled)
+2025-05-22 23:06:18.850 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [24ms]
+2025-05-22 23:06:18.863 [info] > git config --local branch.main.vscode-merge-base [10ms]
+2025-05-22 23:06:18.866 [info] > git config --get commit.template [24ms]
+2025-05-22 23:06:18.888 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/origin/main refs/remotes/origin/main [22ms]
+2025-05-22 23:06:18.894 [info] > git merge-base refs/heads/main refs/remotes/origin/main [2ms]
+2025-05-22 23:06:18.898 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [19ms]
+2025-05-22 23:06:18.906 [warning] [Git][revParse] Unable to read file: ENOENT: no such file or directory, open '/home/adama/aaaaa/.git/refs/remotes/origin/main'
+2025-05-22 23:06:18.908 [info] > git rev-parse refs/remotes/origin/main [2ms]
+2025-05-22 23:06:18.917 [info] > git diff --name-status -z --diff-filter=ADMR fa24a85d34e34c90d2967f9be5cc9c57413cde15...refs/remotes/origin/main [19ms]
+2025-05-22 23:06:18.918 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [1ms]
+2025-05-22 23:06:19.235 [info] > git status -z -uall [323ms]
+2025-05-22 23:06:27.134 [info] > git config --global user.name [3ms]
+2025-05-22 23:06:27.140 [info] > git config --global user.email [1ms]
+2025-05-22 23:06:27.140 [info] [main] Stored git author name in global state:  <>
+2025-05-22 23:06:36.328 [info] > git config --get commit.template [8ms]
+2025-05-22 23:06:36.328 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [2ms]
+2025-05-22 23:06:36.334 [warning] [Git][revParse] Unable to read file: ENOENT: no such file or directory, open '/home/adama/aaaaa/.git/refs/remotes/origin/main'
+2025-05-22 23:06:36.335 [info] > git rev-parse refs/remotes/origin/main [1ms]
+2025-05-22 23:06:36.350 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [1ms]
+2025-05-22 23:06:36.361 [info] > git status -z -uall [20ms]
+2025-05-22 23:06:42.506 [info] > git config --get commit.template [2ms]
+2025-05-22 23:06:42.517 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [3ms]
+2025-05-22 23:06:42.529 [warning] [Git][revParse] Unable to read file: ENOENT: no such file or directory, open '/home/adama/aaaaa/.git/refs/remotes/origin/main'
+2025-05-22 23:06:42.544 [info] > git rev-parse refs/remotes/origin/main [14ms]
+2025-05-22 23:06:42.564 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [5ms]
+2025-05-22 23:06:42.689 [info] > git status -z -uall [140ms]
+2025-05-22 23:06:50.000 [info] > git config --get commit.template [20ms]
+2025-05-22 23:06:50.001 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [7ms]
+2025-05-22 23:06:50.011 [warning] [Git][revParse] Unable to read file: ENOENT: no such file or directory, open '/home/adama/aaaaa/.git/refs/remotes/origin/main'
+2025-05-22 23:06:50.015 [info] > git rev-parse refs/remotes/origin/main [4ms]
+2025-05-22 23:06:50.045 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [4ms]
+2025-05-22 23:06:50.090 [info] > git status -z -uall [63ms]
+2025-05-22 23:07:58.269 [info] > git config --get commit.template [2ms]
+2025-05-22 23:07:58.278 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [2ms]
+2025-05-22 23:07:58.285 [warning] [Git][revParse] Unable to read file: ENOENT: no such file or directory, open '/home/adama/aaaaa/.git/refs/remotes/origin/main'
+2025-05-22 23:07:58.286 [info] > git rev-parse refs/remotes/origin/main [1ms]
+2025-05-22 23:07:58.302 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [1ms]
+2025-05-22 23:07:58.325 [info] > git status -z -uall [34ms]
+2025-05-22 23:07:58.339 [info] > git merge-base refs/heads/main refs/remotes/origin/main [2ms]
+2025-05-22 23:07:58.345 [info] > git diff --name-status -z --diff-filter=ADMR fa24a85d34e34c90d2967f9be5cc9c57413cde15...refs/remotes/origin/main [1ms]
+2025-05-22 23:08:06.177 [info] > git config --get commit.template [3ms]
+2025-05-22 23:08:06.194 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [5ms]
+2025-05-22 23:08:06.220 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [2ms]
+2025-05-22 23:08:06.240 [info] > git status -z -uall [34ms]
+2025-05-22 23:08:06.249 [info] > git merge-base refs/heads/main refs/remotes/origin/main [1ms]
+2025-05-22 23:08:06.253 [info] > git diff --name-status -z --diff-filter=ADMR 1a2c1cd15072825c9778929c5a0bf5701193795f...refs/remotes/origin/main [1ms]
+2025-05-22 23:08:11.269 [info] > git config --get commit.template [1ms]
+2025-05-22 23:08:11.277 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [2ms]
+2025-05-22 23:08:11.295 [info] > git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname) [2ms]
+2025-05-22 23:08:11.320 [info] > git status -z -uall [35ms]

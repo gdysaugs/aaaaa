@@ -1,0 +1,13 @@
+2025-05-22 23:06:02.879 [info] 
+
+
+
+
+2025-05-22 23:06:02.885 [info] Extension host agent started.
+2025-05-22 23:06:02.897 [info] Started initializing default profile extensions in extensions installation folder. file:///home/adama/.cursor-server/extensions
+2025-05-22 23:06:06.278 [info] Completed initializing default profile extensions in extensions installation folder. file:///home/adama/.cursor-server/extensions
+2025-05-22 23:06:08.180 [info] [127.0.0.1][07843515][ManagementConnection] New connection established.
+2025-05-22 23:06:08.388 [info] [127.0.0.1][766cc23b][ExtensionHostConnection] New connection established.
+2025-05-22 23:06:08.427 [info] [127.0.0.1][766cc23b][ExtensionHostConnection] <1210> Launched Extension Host Process.
+2025-05-22 23:11:08.802 [info] [127.0.0.1][07843515][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+2025-05-22 23:11:08.869 [info] [127.0.0.1][766cc23b][ExtensionHostConnection] <1210> Extension Host Process exited with code: 0, signal: null.

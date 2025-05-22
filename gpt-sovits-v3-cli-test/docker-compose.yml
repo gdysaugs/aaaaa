@@ -1,0 +1,42 @@
+services:
+  gpt-sovits-v3:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        CUDA_VERSION: 11.8.0
+        UBUNTU_VERSION: 22.04
+        PYTHON_VERSION: 3.10
+    image: gpt-sovits-v3-cli-test
+    container_name: gpt-sovits-v3-cli-container
+    ipc: host
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1 # Or 'all' to use all available GPUs
+              capabilities: [gpu]
+    volumes:
+      # Mount a local directory for input audio and output results
+      - ./data:/app/data # Example: for input audio and output files
+      # You might want to mount specific directories for models or logs if preferred over baking them in
+      # - ./custom_models:/app/GPT_SoVITS/pretrained_models/custom_models # Example for custom models
+      # - ./logs:/app/logs # Example for logs
+    # If you need to expose ports (e.g., for a web UI or API in the future)
+    # ports:
+    #   - "8000:8000"
+    tty: true # Keeps the container running for interactive use (e.g., with CMD ["bash"])
+    stdin_open: true # Allows attaching to the container's stdin
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+      - PYTHONPATH=/app:$PYTHONPATH
+      - GPT_PATH=/app/GPT_SoVITS/pretrained_models/gsv-v4-pretrained/s2v4.ckpt
+      - SOVITS_PATH=/app/GPT_SoVITS/pretrained_models/gsv-v4-pretrained/s2v4.ckpt
+      - VOCODER_PATH=/app/GPT_SoVITS/pretrained_models/gsv-v4-pretrained/vocoder.pth
+      - BERT_PATH=/app/GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large
+      - SSL_MODEL_PATH=/app/GPT_SoVITS/pretrained_models/chinese-hubert-base
+      - is_half=False # Set to False if you encounter SSL extraction issues
+      # Add any other environment variables needed by GPT-SoVITS
+      # - HF_HOME=/app/.cache/huggingface # If you want to cache huggingface models/datasets inside the container at a specific path 

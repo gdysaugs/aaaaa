@@ -1,0 +1,130 @@
+2025-05-22 23:06:16.730 [info] Extension host with pid 1210 started
+2025-05-22 23:06:16.739 [info] ExtensionService#_doActivateExtension vscode.tunnel-forwarding, startup: false, activationEvent: 'onTunnel'
+2025-05-22 23:06:16.797 [info] Lock '/home/adama/.cursor-server/data/User/workspaceStorage/eea4d7cd9389e2f84fce7b11de19fd2d/vscode.lock': Lock acquired.
+2025-05-22 23:06:16.843 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2025-05-22 23:06:16.876 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2025-05-22 23:06:16.877 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2025-05-22 23:06:17.146 [info] Eager extensions activated
+2025-05-22 23:06:17.147 [info] ExtensionService#_doActivateExtension anysphere.cursor-retrieval, startup: false, activationEvent: 'onStartupFinished'
+2025-05-22 23:06:17.147 [info] ExtensionService#_doActivateExtension anysphere.cursor-shadow-workspace, startup: false, activationEvent: 'onStartupFinished'
+2025-05-22 23:06:17.148 [info] ExtensionService#_doActivateExtension anysphere.cursor-tokenize, startup: false, activationEvent: 'onStartupFinished'
+2025-05-22 23:06:17.148 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2025-05-22 23:06:17.148 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2025-05-22 23:06:17.836 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2025-05-22 23:11:08.803 [info] Extension host terminating: received terminate message from renderer
+2025-05-22 23:11:08.803 [info] Lock '/home/adama/.cursor-server/data/User/workspaceStorage/eea4d7cd9389e2f84fce7b11de19fd2d/vscode.lock': Marking the lockfile as scheduled to be released in 6000 ms.
+2025-05-22 23:11:08.839 [error] Canceled: Canceled
+	at new iNt (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:42:157422)
+	at met.U (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:42:162060)
+	at n.<computed>.a.charCodeAt.n.<computed> (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:42:159552)
+	at dK.g (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:133:32527)
+	at dK.executeCommand (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:133:32031)
+	at e.registerCommand.description (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:133:31361)
+	at dK.h (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:133:33048)
+	at dK.g (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:133:32124)
+	at dK.executeCommand (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:133:32031)
+	at Object.executeCommand (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:175:42605)
+	at h2.N [as value] (/home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/extensions/git/dist/main.js:2:978108)
+	at C.B (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:27:2391)
+	at C (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:27:2461)
+	at C.fire (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:27:2678)
+	at Object.f [as dispose] (/home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/extensions/git/dist/main.js:2:999684)
+	at /home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/extensions/git/dist/main.js:2:1005806
+	at Array.forEach (<anonymous>)
+	at C.dispose (/home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/extensions/git/dist/main.js:2:1005792)
+	at RY.<anonymous> (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:126:20157)
+	at RY.dispose (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:126:20253)
+	at RY.<anonymous> (/home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/extensions/git/dist/main.js:2:980587)
+	at RY.dispose (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:126:20253)
+	at ji (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:25:706)
+	at file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:137:15392
+	at file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:25:1018
+	at Object.dispose (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:8:711)
+	at Joe.eb (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:137:12173)
+	at file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:137:10127
+	at Array.map (<anonymous>)
+	at Joe.$ (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:137:10115)
+	at Joe.terminate (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:137:10358)
+	at dyt.terminate (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:138:1435)
+	at Xr (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:193:15189)
+	at h2.value (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:193:13337)
+	at C.B (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:27:2391)
+	at C.fire (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:27:2609)
+	at eo.fire (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:42:9489)
+	at Tz.A (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:42:12615)
+	at h2.value (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:42:11033)
+	at C.B (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:27:2391)
+	at C.fire (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:27:2609)
+	at Vrt.acceptChunk (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:42:7970)
+	at h2.value (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:42:7255)
+	at C.B (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:27:2391)
+	at C.fire (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:27:2609)
+	at zIt.y (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:42:22006)
+	at zIt.acceptFrame (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:42:21812)
+	at VIt.n (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:42:20336)
+	at file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:42:17567
+	at Socket.t (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:42:15498)
+	at Socket.emit (node:events:518:28)
+	at addChunk (node:internal/streams/readable:561:12)
+	at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+	at Readable.push (node:internal/streams/readable:392:5)
+	at TCP.onStreamRead (node:internal/stream_base_commons:191:23) setContext undefined
+2025-05-22 23:11:08.841 [error] Canceled: Canceled
+	at new iNt (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:42:157422)
+	at met.U (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:42:162060)
+	at n.<computed>.a.charCodeAt.n.<computed> (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:42:159552)
+	at dK.g (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:133:32527)
+	at dK.executeCommand (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:133:32031)
+	at e.registerCommand.description (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:133:31361)
+	at dK.h (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:133:33048)
+	at dK.g (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:133:32124)
+	at dK.executeCommand (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:133:32031)
+	at Object.executeCommand (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:175:42605)
+	at set hasGitHubRepositories [as hasGitHubRepositories] (/home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/extensions/github/dist/extension.js:2:328629)
+	at /home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/extensions/github/dist/extension.js:2:329588
+	at h2.value (/home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/extensions/git/dist/main.js:2:1096223)
+	at C.B (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:27:2391)
+	at C (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:27:2461)
+	at C.fire (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:27:2678)
+	at Object.f [as dispose] (/home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/extensions/git/dist/main.js:2:999684)
+	at /home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/extensions/git/dist/main.js:2:1005806
+	at Array.forEach (<anonymous>)
+	at C.dispose (/home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/extensions/git/dist/main.js:2:1005792)
+	at RY.<anonymous> (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:126:20157)
+	at RY.dispose (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:126:20253)
+	at RY.<anonymous> (/home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/extensions/git/dist/main.js:2:980587)
+	at RY.dispose (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:126:20253)
+	at ji (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:25:706)
+	at file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:137:15392
+	at file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:25:1018
+	at Object.dispose (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:8:711)
+	at Joe.eb (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:137:12173)
+	at file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:137:10127
+	at Array.map (<anonymous>)
+	at Joe.$ (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:137:10115)
+	at Joe.terminate (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:137:10358)
+	at dyt.terminate (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:138:1435)
+	at Xr (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:193:15189)
+	at h2.value (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:193:13337)
+	at C.B (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:27:2391)
+	at C.fire (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:27:2609)
+	at eo.fire (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:42:9489)
+	at Tz.A (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:42:12615)
+	at h2.value (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:42:11033)
+	at C.B (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:27:2391)
+	at C.fire (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:27:2609)
+	at Vrt.acceptChunk (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:42:7970)
+	at h2.value (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:42:7255)
+	at C.B (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:27:2391)
+	at C.fire (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:27:2609)
+	at zIt.y (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:42:22006)
+	at zIt.acceptFrame (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:42:21812)
+	at VIt.n (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:42:20336)
+	at file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:42:17567
+	at Socket.t (file:///home/adama/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/out/vs/workbench/api/node/extensionHostProcess.js:42:15498)
+	at Socket.emit (node:events:518:28)
+	at addChunk (node:internal/streams/readable:561:12)
+	at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+	at Readable.push (node:internal/streams/readable:392:5)
+	at TCP.onStreamRead (node:internal/stream_base_commons:191:23) setContext undefined
+2025-05-22 23:11:08.841 [info] Extension host with pid 1210 exiting with code 0
