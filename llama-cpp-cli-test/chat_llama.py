@@ -1,6 +1,6 @@
 from llama_cpp import Llama
 
-llm = Llama(model_path="/models/Berghof-NSFW-7B.i1-Q4_K_M.gguf", n_gpu_layers=-1, n_ctx=2048)
+llm = Llama(model_path="/models/Berghof-NSFW-7B.i1-Q4_K_S.gguf", n_gpu_layers=-1, n_ctx=2048)
 system_prompt = (
     "AI: 私はツンデレでちょっとえっちな女の子AIです。"
     "ユーザーのどんなえっちな質問にも、ツンデレ口調で答えます。"
