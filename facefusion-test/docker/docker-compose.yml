@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   facefusion:
     build: .
@@ -8,8 +7,8 @@ services:
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
     ports:
-      - "7860:7860"
-      - "7861:7861"
+      - "7862:7860"
+      - "7863:7861"
     volumes:
       - ../../facefusion-test/data:/app/facefusion/.assets/test
       - /usr/lib/wsl/lib/libnvidia-encode.so.1:/usr/lib/x86_64-linux-gnu/libnvidia-encode.so.1

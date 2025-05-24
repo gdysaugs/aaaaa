@@ -29,3 +29,6 @@ python3 inference.py \
   --pads 0 10 0 0 \
   --face_det_batch_size 1 \
   --wav2lip_batch_size 4
+
+echo "Wav2Lip処理が完了しました！"
+echo "出力ファイル: /workspace/data/output/result_smooth.mp4"
