@@ -1,0 +1,203 @@
+# GPT-SoVITS v4 CLI Test Environment - PyTorch 2.6 + CUDA 12.6 Edition
+# RTX3050 & CUDA 12.4対応に最適化されたボイスクローンCLIテスト環境
+# 2025年2月対応版: PyTorch 2.6 + torch.load脆弱性対策済み
+
+# =============================================================================
+# Stage 1: Base System + CUDA環境
+# =============================================================================
+FROM nvidia/cuda:12.4.1-devel-ubuntu22.04 AS base
+
+# 非対話モード設定
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Asia/Tokyo
+
+# RTX3050最適化メモリ設定
+ENV PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512,roundup_power2_divisions:2
+ENV CUDA_VISIBLE_DEVICES=0
+
+# 新PyTorch 2.6用ABI設定
+ENV CXX11_ABI=1
+ENV TORCH_USE_CUDA_DSA=1
+
+# Numba & Matplotlib キャッシング問題対策
+ENV NUMBA_CACHE_DIR=/tmp/numba_cache
+ENV MPLCONFIGDIR=/tmp/matplotlib
+ENV NUMBA_DISABLE_INTEL_SVML=1
+
+# 基本パッケージインストール
+RUN apt-get update && apt-get install -y \
+    python3.10 \
+    python3.10-dev \
+    python3-pip \
+    git \
+    git-lfs \
+    ca-certificates \
+    curl \
+    wget \
+    unzip \
+    build-essential \
+    ffmpeg \
+    libsndfile1 \
+    sox \
+    libasound2-dev \
+    portaudio19-dev \
+    libportaudio2 \
+    libportaudiocpp0 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Python環境設定
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.10 1
+RUN update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1
+
+# pip最新化
+RUN pip install --upgrade pip setuptools wheel
+
+# =============================================================================
+# Stage 2: PyTorch 2.6 + 依存関係インストール
+# =============================================================================
+FROM base AS pytorch-stage
+
+# PyTorch 2.6 + CUDA 12.6インストール（最新版）
+# 注意: CUDA 12.6サポートだが、CUDA 12.4環境でも動作
+RUN pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 \
+    --index-url https://download.pytorch.org/whl/cu124 \
+    --no-cache-dir
+
+# PyTorchバージョン確認
+RUN python -c "import torch; print(f'PyTorch: {torch.__version__}'); print(f'CUDA available: {torch.cuda.is_available()}'); print(f'CUDA version: {torch.version.cuda}')"
+
+# 最新transformersライブラリ（PyTorch 2.6対応版）
+RUN pip install --no-cache-dir \
+    transformers>=4.48.0 \
+    tokenizers>=0.21.0 \
+    safetensors>=0.4.0 \
+    accelerate>=1.0.0
+
+# =============================================================================
+# Stage 3: PyTorch 2.6関連依存関係（requirements.txtと重複しないもののみ）
+# =============================================================================
+FROM pytorch-stage AS pytorch-deps
+
+# PyTorch 2.6専用の追加ライブラリ（requirements.txtにないもの）
+RUN pip install --no-cache-dir \
+    accelerate>=1.0.0 \
+    safetensors>=0.4.0
+
+# =============================================================================
+# Stage 4: GPT-SoVITS環境構築
+# =============================================================================
+FROM pytorch-deps AS gpt-sovits-stage
+
+# 作業ディレクトリ作成
+WORKDIR /workspace
+
+# Git LFS初期化
+RUN git lfs install
+
+# GPT-SoVITS v4クローン（確実なLFS対応）
+RUN git clone https://github.com/RVC-Boss/GPT-SoVITS.git && \
+    cd GPT-SoVITS && \
+    git lfs fetch --all && \
+    git lfs checkout
+
+# GPT-SoVITS依存関係インストール（公式requirements.txt使用）
+WORKDIR /workspace/GPT-SoVITS
+RUN pip install --no-cache-dir -r requirements.txt
+
+# PYTHONPATHでGPT-SoVITSを追加（pip install -e .の代替）
+ENV PYTHONPATH="/workspace/GPT-SoVITS:$PYTHONPATH"
+
+# =============================================================================
+# Stage 5: モデルファイル自動ダウンロード
+# =============================================================================
+FROM gpt-sovits-stage AS model-download
+
+# モデルディレクトリ作成
+RUN mkdir -p /workspace/GPT-SoVITS/GPT_SoVITS/pretrained_models/gsv-v4-pretrained && \
+    mkdir -p /workspace/GPT-SoVITS/GPT_SoVITS/pretrained_models/chinese-hubert-base && \
+    mkdir -p /workspace/GPT-SoVITS/GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large
+
+WORKDIR /workspace/GPT-SoVITS/GPT_SoVITS/pretrained_models
+
+# GPT-SoVITS v4正しいモデル構成ダウンロード
+# GitHub Issue #2312に基づく正しいファイル構成
+
+# 1. GPT v3モデル (s1v3.ckpt)
+RUN curl -L -o s1v3.ckpt \
+    "https://huggingface.co/lj1995/GPT-SoVITS/resolve/main/s1v3.ckpt" \
+    --connect-timeout 30 --max-time 1200
+
+# 2. SoVITS v4モデル (s2Gv4.pth) - 正しいファイル
+RUN curl -L -o gsv-v4-pretrained/s2Gv4.pth \
+    "https://huggingface.co/lj1995/GPT-SoVITS/resolve/main/gsv-v4-pretrained/s2Gv4.pth" \
+    --connect-timeout 30 --max-time 1200
+
+# 3. v4ボコーダー (vocoder.pth)
+RUN curl -L -o gsv-v4-pretrained/vocoder.pth \
+    "https://huggingface.co/lj1995/GPT-SoVITS/resolve/main/gsv-v4-pretrained/vocoder.pth" \
+    --connect-timeout 30 --max-time 600
+
+# 4. HuBERTモデル
+RUN curl -L -o chinese-hubert-base/pytorch_model.bin \
+    "https://huggingface.co/TencentGameMate/chinese-hubert-base/resolve/main/pytorch_model.bin" \
+    --connect-timeout 30 --max-time 600 && \
+    curl -L -o chinese-hubert-base/config.json \
+    "https://huggingface.co/TencentGameMate/chinese-hubert-base/resolve/main/config.json"
+
+# 5. RoBERTaモデル（PyTorch 2.6対応版）
+RUN curl -L -o chinese-roberta-wwm-ext-large/pytorch_model.bin \
+    "https://huggingface.co/hfl/chinese-roberta-wwm-ext-large/resolve/main/pytorch_model.bin" \
+    --connect-timeout 30 --max-time 1200 && \
+    curl -L -o chinese-roberta-wwm-ext-large/config.json \
+    "https://huggingface.co/hfl/chinese-roberta-wwm-ext-large/resolve/main/config.json" && \
+    curl -L -o chinese-roberta-wwm-ext-large/tokenizer.json \
+    "https://huggingface.co/hfl/chinese-roberta-wwm-ext-large/resolve/main/tokenizer.json" && \
+    curl -L -o chinese-roberta-wwm-ext-large/tokenizer_config.json \
+    "https://huggingface.co/hfl/chinese-roberta-wwm-ext-large/resolve/main/tokenizer_config.json" && \
+    curl -L -o chinese-roberta-wwm-ext-large/vocab.txt \
+    "https://huggingface.co/hfl/chinese-roberta-wwm-ext-large/resolve/main/vocab.txt"
+
+# =============================================================================
+# Stage 6: 最終環境設定
+# =============================================================================
+FROM model-download AS final
+
+# 設定ディレクトリ作成
+RUN mkdir -p /workspace/GPT-SoVITS/GPT_SoVITS/configs
+
+# v4用設定ファイル作成（修正版）
+RUN echo 'custom:\n  bert_base_path: GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large\n  cnhuhbert_base_path: GPT_SoVITS/pretrained_models/chinese-hubert-base\n  device: cuda\n  is_half: true\n  t2s_weights_path: GPT_SoVITS/pretrained_models/s1v3.ckpt\n  version: v4\n  vits_weights_path: GPT_SoVITS/pretrained_models/gsv-v4-pretrained/s2Gv4.pth' > /workspace/GPT-SoVITS/GPT_SoVITS/configs/tts_infer_v4.yaml
+
+# GPU確認スクリプト作成
+RUN echo '#!/bin/bash\necho "=== GPU Information ==="\nnvidia-smi\necho ""\necho "=== PyTorch CUDA Status ==="\npython3 -c "\nimport torch\nprint(f\"PyTorch version: {torch.__version__}\")\nprint(f\"CUDA available: {torch.cuda.is_available()}\")\nprint(f\"CUDA devices: {torch.cuda.device_count()}\")\nif torch.cuda.is_available():\n    print(f\"Current device: {torch.cuda.current_device()}\")\n    print(f\"Device name: {torch.cuda.get_device_name()}\")\n    print(f\"CUDA capability: {torch.cuda.get_device_capability()}\")\n    print(f\"CUDA version: {torch.version.cuda}\")\n    print(f\"cuDNN version: {torch.backends.cudnn.version()}\")\n    print(f\"GPU memory: {torch.cuda.get_device_properties(0).total_memory / 1024**3:.1f} GB\")\n"' > /workspace/check_gpu.sh
+
+# API起動スクリプト作成
+RUN echo '#!/bin/bash\necho "=== Starting GPT-SoVITS v4 API Server ==="\necho "PyTorch 2.6 + CUDA 12.6 + RTX3050 Optimized"\necho ""\n\n# GPU確認\npython3 -c "import torch; print(f\"GPU Status: {torch.cuda.is_available()}\")"\n\n# APIサーバー起動\ncd /workspace/GPT-SoVITS\npython3 api_v2.py \\\n    -a 0.0.0.0 \\\n    -p 9880 \\\n    -c GPT_SoVITS/configs/tts_infer_v4.yaml' > /workspace/start_api.sh
+
+# 実行権限付与
+RUN chmod +x /workspace/check_gpu.sh /workspace/start_api.sh
+
+# ファイナルワークディレクトリ
+WORKDIR /workspace
+
+# ポート公開
+EXPOSE 9880
+
+# ヘルスチェック
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD python3 -c "import torch; exit(0 if torch.cuda.is_available() else 1)"
+
+# デフォルトコマンド
+CMD ["/workspace/check_gpu.sh"]
+
+# =============================================================================
+# Dockerfile Metadata
+# =============================================================================
+LABEL maintainer="GPT-SoVITS v4 CLI Test Environment" \
+      version="2.0-pytorch2.6-cuda12.6" \
+      description="RTX3050最適化 GPT-SoVITS v4 + PyTorch 2.6 + CUDA 12.6対応版" \
+      pytorch.version="2.6.0" \
+      cuda.version="12.4/12.6" \
+      gpu.optimized="RTX3050-4GB" \
+      security.torch_load="FIXED" \
+      issue.reference="https://github.com/RVC-Boss/GPT-SoVITS/issues/2312" 

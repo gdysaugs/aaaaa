@@ -1,0 +1,102 @@
+# GPT-SoVITS v4 CLI Test Environment
+# RTX3050 + CUDA 12.4対応版
+
+services:
+  gpt-sovits-v4-cli:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        BUILDKIT_INLINE_CACHE: 1
+    image: gpt-sovits-v4-cli:latest
+    container_name: gpt-sovits-v4-cli
+    
+    # GPU設定
+    runtime: nvidia
+    
+    # 環境変数
+    environment:
+      # GPU関連
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+      
+      # RTX3050最適化メモリ管理
+      - PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512,roundup_power2_divisions:2
+      - CUDA_VISIBLE_DEVICES=0
+      
+      # API設定
+      - API_HOST=0.0.0.0
+      - API_PORT=9880
+      
+      # ログ設定
+      - PYTHONUNBUFFERED=1
+      - CUDA_LAUNCH_BLOCKING=0
+    
+    # リソース制限（RTX3050: 4GB VRAM）
+    deploy:
+      resources:
+        limits:
+          memory: 12G
+        reservations:
+          memory: 8G
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+      
+    # ポートマッピング
+    ports:
+      - "9880:9880"
+      - "7860:7860"
+      
+    # ボリュームマウント
+    volumes:
+      # モデル永続化
+      - ./models:/workspace/models
+      - ./pretrained_models:/workspace/pretrained_models
+      
+      # 入出力ディレクトリ
+      - ./input:/workspace/input
+      - ./output:/workspace/output
+      - ./reference:/workspace/reference
+      
+      # ログ・設定
+      - ./logs:/workspace/logs
+      - ./configs:/workspace/configs
+      
+      # GPT/SoVITS重み
+      - ./GPT_weights:/workspace/GPT_weights
+      - ./SoVITS_weights:/workspace/SoVITS_weights
+      
+      # テストサンプル
+      - ./test_samples:/workspace/test_samples
+      
+    # ネットワーク設定
+    networks:
+      - gpt-sovits-network
+      
+    # 再起動ポリシー
+    restart: unless-stopped
+    
+    # ヘルスチェック
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import torch; exit(0 if torch.cuda.is_available() else 1)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+              
+    # セキュリティ設定
+    security_opt:
+      - seccomp:unconfined
+      
+    # ユーザー設定
+    user: "1000:1000"
+    
+    # 作業ディレクトリ
+    working_dir: /workspace
+
+# ネットワーク定義
+networks:
+  gpt-sovits-network:
+    driver: bridge 
