@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  # シンプルなAPIサーバー（CLIで成功したモジュールを使用）
+  llama-simple-api:
+    build: .
+    container_name: llama-simple-gpu-api
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./models:/models:ro
+    environment:
+      - MODEL_PATH=/models/Berghof-NSFW-7B.i1-Q4_K_S.gguf
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    restart: unless-stopped
+    command: python3 simple_api.py
+
+  # CLIテスト用（元のまま）
+  llama-cli:
+    build: .
+    container_name: llama-cpp-gpu-cli
+    volumes:
+      - ./models:/models:ro
+    environment:
+      - MODEL_PATH=/models/Berghof-NSFW-7B.i1-Q4_K_S.gguf
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    stdin_open: true
+    tty: true
+    command: python3 chat_llama.py
+    profiles:
+      - cli 

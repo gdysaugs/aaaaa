@@ -1,0 +1,6 @@
+# GPT-SoVITS v4 FastAPI Docker Image
+FROM nvidia/cuda:11.8-runtime-ubuntu22.04
+WORKDIR /workspace
+COPY . /workspace/
+EXPOSE 8000 9880
+CMD ["python3", "gpt_sovits_fastapi.py", "--host", "0.0.0.0", "--port", "8000"]
