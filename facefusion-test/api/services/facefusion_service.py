@@ -38,13 +38,44 @@ class FaceFusionService:
         
     def setup_environment(self):
         """環境変数設定"""
-        os.environ['OMP_NUM_THREADS'] = '1'
+        # スレッド数最適化（GPU使用時はCPUコア数の半分を使用）
+        if torch.cuda.is_available():
+            # GPU使用時は少ないCPUスレッド数で十分
+            os.environ['OMP_NUM_THREADS'] = '2'  
+            os.environ['MKL_NUM_THREADS'] = '2'
+            os.environ['NUMEXPR_NUM_THREADS'] = '2'
+        else:
+            # CPU専用時はより多くのスレッドを使用
+            os.environ['OMP_NUM_THREADS'] = '4'
+            os.environ['MKL_NUM_THREADS'] = '4'
+            os.environ['NUMEXPR_NUM_THREADS'] = '4'
+            
         os.environ['PYTHONPATH'] = str(self.facefusion_path)
         
-        # CUDA設定
+        # CUDA最適化設定
         if torch.cuda.is_available():
             os.environ['CUDA_VISIBLE_DEVICES'] = os.environ.get('CUDA_VISIBLE_DEVICES', '0')
+            # CUDA最適化フラグ
+            os.environ['CUDA_LAUNCH_BLOCKING'] = '0'  # 非同期CUDA実行
+            os.environ['CUDA_CACHE_DISABLE'] = '0'   # CUDAキャッシュ有効化
+            # cuDNN最適化
+            os.environ['CUDNN_BENCHMARK'] = '1'      # cuDNNベンチマーク有効化
+            os.environ['CUDNN_DETERMINISTIC'] = '0'  # 決定論的実行無効（高速化）
             
+            # PyTorch最適化
+            torch.backends.cudnn.benchmark = True     # cuDNNベンチマーク
+            torch.backends.cudnn.deterministic = False # 非決定論的実行（高速化）
+            torch.backends.cudnn.enabled = True       # cuDNN有効化
+            
+            # CUDA最適化情報出力
+            logger.info(f"🚀 CUDA最適化設定完了:")
+            logger.info(f"   - cuDNN benchmark: {torch.backends.cudnn.benchmark}")
+            logger.info(f"   - cuDNN deterministic: {torch.backends.cudnn.deterministic}")
+            logger.info(f"   - CUDA devices: {os.environ.get('CUDA_VISIBLE_DEVICES', '0')}")
+            
+        # メモリ最適化
+        os.environ['PYTORCH_CUDA_ALLOC_CONF'] = 'max_split_size_mb:128'
+        
     def validate_environment(self) -> Dict[str, Any]:
         """環境検証"""
         validation = {
@@ -119,7 +150,10 @@ class FaceFusionService:
             '--face-swapper-pixel-boost', pixel_boost,
             '--execution-providers', 'cuda' if torch.cuda.is_available() else 'cpu',
             '--log-level', 'info',
-            '--output-image-quality', str(quality)
+            '--output-image-quality', str(quality),
+            # 高速化設定（FaceFusion 3.2.0対応）
+            '--execution-thread-count', '2',        # 実行スレッド数
+            '--execution-queue-count', '1'          # 実行キュー数
         ]
         
         return self._execute_command(cmd, output_path, "image", model=model, quality=quality)
@@ -175,7 +209,10 @@ class FaceFusionService:
             '--log-level', 'info',
             '--output-video-quality', str(quality),
             '--trim-frame-start', str(trim_start),
-            '--trim-frame-end', str(trim_end)
+            '--trim-frame-end', str(trim_end),
+            # 高速化設定（FaceFusion 3.2.0対応）
+            '--execution-thread-count', '2',        # 実行スレッド数
+            '--execution-queue-count', '1'          # 実行キュー数
         ]
             
         return self._execute_command(cmd, output_path, "video", model=model, quality=quality)
