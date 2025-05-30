@@ -2,22 +2,26 @@
 version: '3.8'
 
 services:
-  # FaceFusion API サービス
+  # FaceFusion APIサービス
   facefusion-api:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        BUILDKIT_INLINE_CACHE: 1
     container_name: facefusion-api
     ports:
       - "8000:8000"
     volumes:
       - ./data:/app/data
-      - ./api/static/uploads:/app/api/static/uploads
-      - ./api/static/outputs:/app/api/static/outputs
+      - ./downloads:/app/downloads
+      - ./models:/app/models
       - ./logs:/app/logs
-      - facefusion-models:/app/facefusion/models
     environment:
+      - PYTHONPATH=/app
       - CUDA_VISIBLE_DEVICES=0
-      - OMP_NUM_THREADS=1
-      - FACEFUSION_PATH=/app/facefusion
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
     deploy:
       resources:
         reservations:
@@ -25,40 +29,36 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
+    networks:
+      - facefusion-network
+    restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 30s
-    restart: unless-stopped
-    networks:
-      - facefusion-network
 
-  # FaceFusion Frontend サービス
+  # フロントエンドサービス
   facefusion-frontend:
-    build: 
-      context: ./facefusion-frontend
+    build:
+      context: ./frontend
       dockerfile: Dockerfile
+      target: production
     container_name: facefusion-frontend
     ports:
-      - "3000:3000"
+      - "3000:80"
     depends_on:
       - facefusion-api
+    networks:
+      - facefusion-network
+    restart: unless-stopped
     environment:
       - NODE_ENV=production
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 30s
-    restart: unless-stopped
-    networks:
-      - facefusion-network
-
-volumes:
-  facefusion-models:
 
 networks:
   facefusion-network:
